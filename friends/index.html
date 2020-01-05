@@ -59,22 +59,22 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
-      <span>标签</span>
+      <span>分类</span>
     </a>
     
   </li>
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/categories" class="waves-effect waves-light">
+    <a href="/tags" class="waves-effect waves-light">
       
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
-      <span>分类</span>
+      <span>标签</span>
     </a>
     
   </li>
@@ -97,6 +97,17 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
     </a>
     
   </li>
@@ -150,22 +161,22 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-tags"></i>
+			    <i class="fa-fw fas fa-bookmark"></i>
 			
-			标签
+			分类
 		</a>
           
         </li>
         
         <li class="m-nav-item">
 	  
-		<a href="/categories" class="waves-effect waves-light">
+		<a href="/tags" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-bookmark"></i>
+			    <i class="fa-fw fas fa-tags"></i>
 			
-			分类
+			标签
 		</a>
           
         </li>
@@ -188,6 +199,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
 		</a>
           
         </li>
@@ -567,7 +589,25 @@
         </div>
         <div class="card">
             <div class="card-content">
-                
+                <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
         </div>
         <div class="card">
@@ -591,7 +631,7 @@
 var gitment = new Gitment({
     id: 'Sun Jan 05 2020 15:10:12 GMT+0800',
     owner: 'husycoding',
-    repo: 'https://github.com/HusyCoding/husycoding.github.io.git',
+    repo: 'husycoding.github.io',
     oauth: {
         client_id: '6e5a7dbb6566fab04e92',
         client_secret: '2f87721f5295987e35e8f84b298c19932216dff1'
@@ -627,7 +667,8 @@ gitment.render('gitment-content');
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
             <a href="http://husycode.cn" target="_blank">Husy</a>
-           
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
             
@@ -652,7 +693,7 @@ gitment.render('gitment-content');
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/husycoding" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/HusyCoding/JNotes" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 

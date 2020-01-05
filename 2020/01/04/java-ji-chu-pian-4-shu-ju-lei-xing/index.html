@@ -65,22 +65,22 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
-      <span>标签</span>
+      <span>分类</span>
     </a>
     
   </li>
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/categories" class="waves-effect waves-light">
+    <a href="/tags" class="waves-effect waves-light">
       
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
-      <span>分类</span>
+      <span>标签</span>
     </a>
     
   </li>
@@ -103,6 +103,17 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
     </a>
     
   </li>
@@ -156,22 +167,22 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-tags"></i>
+			    <i class="fa-fw fas fa-bookmark"></i>
 			
-			标签
+			分类
 		</a>
           
         </li>
         
         <li class="m-nav-item">
 	  
-		<a href="/categories" class="waves-effect waves-light">
+		<a href="/tags" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-bookmark"></i>
+			    <i class="fa-fw fas fa-tags"></i>
 			
-			分类
+			标签
 		</a>
           
         </li>
@@ -194,6 +205,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
 		</a>
           
         </li>
@@ -409,12 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                <span class="chip bg-color">面试</span>
+                            <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                                <span class="chip bg-color">面试考点</span>
                             </a>
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">Java 基础</span>
                             </a>
                         
                     </div>
@@ -425,11 +447,7 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-category">
-                                技术栈
-                            </a>
-                        
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Java/" class="post-category">
+                            <a href="/categories/Java/" class="post-category">
                                 Java
                             </a>
                         
@@ -442,14 +460,24 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-05
+                    2020-01-04
                 </div>
                 
 
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.2k
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
                 
 				
                 
@@ -466,7 +494,7 @@
             <div id="articleContent">
                 <p>在本章中，主要介绍一下 Java 最常用、也是基础考点的数据类型；我们都知道 Java 语言提供了八种基本类型：六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。并且还提供了其对应的引用类型。</p>
 <hr>
-<h1 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h1><table>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -536,7 +564,7 @@ char字符：中,字节数：2</code></pre><p><strong>boolean</strong>：在 Jav
 </ul>
 <p><strong>注意</strong>： <code>float</code> 和 <code>double</code> 都不能表示精确的值，所以一般不能用在计算货币，要想精度不失效，可以使用 <code>BigDecimal</code></p>
 <hr>
-<h1 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h1><p>在 Java 中引用类型指向一个对象，指向对象的变量是引用变量。这些变量在声明时被指定为一个特定的类型，比如 Employee、Puppy 等。变量一旦声明后，类型就不能被改变了。</p>
+<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p>在 Java 中引用类型指向一个对象，指向对象的变量是引用变量。这些变量在声明时被指定为一个特定的类型，比如 Employee、Puppy 等。变量一旦声明后，类型就不能被改变了。</p>
 <ul>
 <li>对象、数组都是引用数据类型；</li>
 <li>所有引用类型的默认值都是null；</li>
@@ -553,7 +581,7 @@ char字符：中,字节数：2</code></pre><p><strong>boolean</strong>：在 Jav
 </li>
 </ul>
 <hr>
-<h2 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a><strong>自动装箱和拆箱</strong></h2><p>自动拆箱：故名思议就是<code>将对象重新转化为基本数据类型</code>；是享元模式（flyweight）</p>
+<h3 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a><strong>自动装箱和拆箱</strong></h3><p>自动拆箱：故名思议就是<code>将对象重新转化为基本数据类型</code>；是享元模式（flyweight）</p>
 <pre class=" language-java"><code class="language-java">Integer num <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//装箱</span>
 <span class="token keyword">int</span> num1 <span class="token operator">=</span> num<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//拆箱</span></code></pre>
 <p><strong>基本数据类型和引用数据类型区别</strong></p>
@@ -562,7 +590,7 @@ char字符：中,字节数：2</code></pre><p><strong>boolean</strong>：在 Jav
 <li><code>引用数据类型</code>在被创建时，对象的具体信息都存储在堆内存上，对象的引用地址存储在栈上</li>
 </ul>
 <hr>
-<h2 id="new-Integer-123-与-Integer-valueOf-123-区别"><a href="#new-Integer-123-与-Integer-valueOf-123-区别" class="headerlink" title="new Integer(123) 与 Integer.valueOf(123)区别"></a>new Integer(123) 与 Integer.valueOf(123)区别</h2><p>注意：我们使用基本类型的引用类型新建对象时，可能出现一些意料之外的变化，如：</p>
+<h3 id="new-Integer-123-与-Integer-valueOf-123-区别"><a href="#new-Integer-123-与-Integer-valueOf-123-区别" class="headerlink" title="new Integer(123) 与 Integer.valueOf(123)区别"></a>new Integer(123) 与 Integer.valueOf(123)区别</h3><p>注意：我们使用基本类型的引用类型新建对象时，可能出现一些意料之外的变化，如：</p>
 <pre class=" language-java"><code class="language-java">Integer x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 Integer y <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>x <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// false</span>
@@ -576,7 +604,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 </ul>
 <p><strong>注意：4种整型都有相同效果，有兴趣的可以分别试试 Byte、Short、Integer、Long 的效果</strong></p>
 <hr>
-<h2 id="Integer或-Short-缓存池上下边界"><a href="#Integer或-Short-缓存池上下边界" class="headerlink" title="Integer或 Short  缓存池上下边界"></a>Integer或 Short  缓存池上下边界</h2><p>Short 其实和 Integer 是相同效果，这里以 Integer 为例</p>
+<h3 id="Integer或-Short-缓存池上下边界"><a href="#Integer或-Short-缓存池上下边界" class="headerlink" title="Integer或 Short  缓存池上下边界"></a>Integer或 Short  缓存池上下边界</h3><p>Short 其实和 Integer 是相同效果，这里以 Integer 为例</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//在-128~127 之外的数</span>
 Integer num1 <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">;</span>   
 Integer num2 <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">;</span>           
@@ -587,7 +615,7 @@ Integer num4 <span class="token operator">=</span> <span class="token number">12
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"num3==num4: "</span><span class="token operator">+</span><span class="token punctuation">(</span>num3<span class="token operator">==</span>num4<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//true   </span></code></pre>
 <p>为什么出现以上结果，这是因为 *<em>Integer *</em>如果超过了从–128到127之间的值，被装箱后的Integer对象并不会被重用，即相当于每次装箱时都新建一个 Integer对象</p>
 <hr>
-<h2 id="IntegerCache-源码分析"><a href="#IntegerCache-源码分析" class="headerlink" title="IntegerCache 源码分析"></a>IntegerCache 源码分析</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">IntegerCache</span> <span class="token punctuation">{</span>
+<h3 id="IntegerCache-源码分析"><a href="#IntegerCache-源码分析" class="headerlink" title="IntegerCache 源码分析"></a>IntegerCache 源码分析</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">IntegerCache</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> low <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">128</span><span class="token punctuation">;</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> high<span class="token punctuation">;</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> Integer cache<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -629,7 +657,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <p>  在 jdk 1.8 IntegerCache 缓冲池中，可以看出，这个缓冲池的下界是 - 128，上界默认是 127，但是这个上界是可调的，在启动 jvm 的时候，通过 -XX:AutoBoxCacheMax= 来指定这个缓冲池的大小，该选项在 JVM 初始化的时候会设定一个名为 java.lang.IntegerCache.high 系统属性，然后 IntegerCache 初始化的时候就会读取该系统属性来决定上界。</p>
 </blockquote>
 <hr>
-<h1 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h1><h2 id="String-不可变"><a href="#String-不可变" class="headerlink" title="String 不可变"></a>String 不可变</h2><p>String 类型 是一个final修饰的类型。因此它不可被继承。在 Java 8 中，String 内部使用 char 数组存储数据。</p>
+<h2 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h2><h3 id="String-不可变"><a href="#String-不可变" class="headerlink" title="String 不可变"></a>String 不可变</h3><p>String 类型 是一个final修饰的类型。因此它不可被继承。在 Java 8 中，String 内部使用 char 数组存储数据。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span> <span class="token keyword">implements</span> <span class="token class-name">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable</span><span class="token punctuation">,</span> Comparable<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">,</span> CharSequence <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">char</span> value<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
@@ -640,7 +668,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <li><strong>String Pool 的需要</strong>：如果一个 String 对象已经被创建过了，那么就会从 String Pool 中取得引用。<strong>只有 String 是不可变的，才可能使用 String Pool</strong>。</li>
 <li><strong>安全性</strong>：String 不可变性天生具备线程安全，可以在多个线程中安全地使用。String 经常作为参数，String 不可变性可以保证参数不可变。</li>
 </ul>
-<h2 id="String-赋值"><a href="#String-赋值" class="headerlink" title="String 赋值"></a>String 赋值</h2><pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token string">"bbb"</span><span class="token punctuation">;</span>
+<h3 id="String-赋值"><a href="#String-赋值" class="headerlink" title="String 赋值"></a>String 赋值</h3><pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token string">"bbb"</span><span class="token punctuation">;</span>
 String s2 <span class="token operator">=</span> <span class="token string">"bbb"</span><span class="token punctuation">;</span>
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s5 <span class="token operator">==</span> s6<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// true</span></code></pre>
 <p>如果是采用 “bbb” 这种字面量的形式创建字符串，会自动地将字符串放入 String Pool 中。而不是象new一样放在压缩堆中；当声明这样的一个字符串后，JVM会在常量池中先查找有没有一个值为”bbb”的对象，</p>
@@ -649,7 +677,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <li>如果没有：则在常量池中新创建一个”bbb”,</li>
 </ul>
 <p>下一次如果有String s2 = “bbb”；又会将s2指向”abcd”这个对象；即以这形式声明的字符串，只要值相等，任何多个引用都指向同一对象.</p>
-<p>而<code>String s = new String(&quot;abcd&quot;);</code>和其它任何对象一样，每调用一次就产生一个对象</p>
+<p>而<code>String s = new String("abcd");</code>和其它任何对象一样，每调用一次就产生一个对象</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//代码1  </span>
 String sa <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span>                                          
 String sb <span class="token operator">=</span> <span class="token string">"cd"</span><span class="token punctuation">;</span>                                       
@@ -671,7 +699,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <li>“abc” 属于字符串字面量，因此编译时期会在 <strong>String Pool 中</strong>创建一个字符串对象，指向这个字符串字面量；</li>
 <li>而使用 new 的方式会在<strong>堆中</strong>创建一个字符串对象。</li>
 </ul>
-<h2 id="String-字节-编码"><a href="#String-字节-编码" class="headerlink" title="String 字节/编码"></a>String 字节/编码</h2><p>如果编码和解码过程使用不同的编码方式那么就出现了乱码。</p>
+<h3 id="String-字节-编码"><a href="#String-字节-编码" class="headerlink" title="String 字节/编码"></a>String 字节/编码</h3><p>如果编码和解码过程使用不同的编码方式那么就出现了乱码。</p>
 <ul>
 <li>GBK 编码中，中文字符占 2 个字节，英文字符占 1 个字节；</li>
 <li>UTF-8 编码中，中文字符占 3 个字节，英文字符占 1 个字节；</li>
@@ -696,7 +724,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 gbk<span class="token operator">:</span><span class="token string">'a'</span>所占的字节数<span class="token operator">:</span><span class="token number">1</span>
 utf<span class="token operator">-</span><span class="token number">8</span><span class="token operator">:</span><span class="token string">'中'</span>所占的字节数<span class="token operator">:</span><span class="token number">3</span>
 gbk<span class="token operator">:</span><span class="token string">'中'</span>所占的字节数<span class="token operator">:</span><span class="token number">2</span></code></pre>
-<h2 id="String、StringBuffer、-StringBuilder的区别"><a href="#String、StringBuffer、-StringBuilder的区别" class="headerlink" title="String、StringBuffer、 StringBuilder的区别"></a>String、StringBuffer、 StringBuilder的区别</h2><ul>
+<h3 id="String、StringBuffer、-StringBuilder的区别"><a href="#String、StringBuffer、-StringBuilder的区别" class="headerlink" title="String、StringBuffer、 StringBuilder的区别"></a>String、StringBuffer、 StringBuilder的区别</h3><ul>
 <li><p>从运行速度上说，StringBuilder&gt;StringBuffer&gt;String，因为String是不可变的对象</p>
 </li>
 <li><p>String：是字符串常量（由final修饰），StringBuffer和StringBuilder 是字符串变量</p>
@@ -733,7 +761,7 @@ gbk<span class="token operator">:</span><span class="token string">'中'</span>�
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <hr>
-<h2 id="String-Pool"><a href="#String-Pool" class="headerlink" title="String Pool"></a>String Pool</h2><ul>
+<h3 id="String-Pool"><a href="#String-Pool" class="headerlink" title="String Pool"></a>String Pool</h3><ul>
 <li>字符串常量池（String Pool）保存着所有字符串字面量（literal strings），这些字面量在编译时期就确定</li>
 <li>String 的 intern() 方法在运行过程中将字符串添加到 String Pool 中</li>
 </ul>
@@ -746,7 +774,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <p><strong>String#intern</strong> 方法：intern 方法会从字符串常量池中查询当前字符串是否存在，若不存在就会将当前字符串放入常量池中返回这个新字符串的引用，若存在（使用 equals() 方法进行确定）那么就会返回 String Pool 中字符串的引用；</p>
 <p>在 Java 7 之前，String Pool 被放在运行时常量池中，它属于永久代。而在 Java 7，String Pool 被移到堆中。这是因为永久代的空间有限，在大量使用字符串的场景下会导致 OutOfMemoryError 错误。</p>
 <hr>
-<h2 id="String-常用方法"><a href="#String-常用方法" class="headerlink" title="String 常用方法"></a>String 常用方法</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">endsWith</span><span class="token punctuation">(</span>String suffix<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//测试此字符串是否以指定的后缀结束</span>
+<h3 id="String-常用方法"><a href="#String-常用方法" class="headerlink" title="String 常用方法"></a>String 常用方法</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">endsWith</span><span class="token punctuation">(</span>String suffix<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//测试此字符串是否以指定的后缀结束</span>
 <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">startsWith</span><span class="token punctuation">(</span>String prefix<span class="token punctuation">)</span>
 <span class="token keyword">public</span> <span class="token keyword">char</span> <span class="token function">charAt</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回指定索引处的 char 值</span>
 <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>String str<span class="token punctuation">)</span> 
@@ -755,8 +783,8 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <span class="token keyword">public</span> String <span class="token function">substring</span><span class="token punctuation">(</span><span class="token keyword">int</span> beginIndex<span class="token punctuation">)</span>   
 <span class="token keyword">public</span> String <span class="token function">replace</span><span class="token punctuation">(</span><span class="token keyword">char</span> oldChar<span class="token punctuation">,</span><span class="token keyword">char</span> newChar<span class="token punctuation">)</span>
 <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><p>在 Java 中 Object 是所有的祖类。</p>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><p>在 Java 中 Object 是所有的祖类。</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object obj<span class="token punctuation">)</span>
 <span class="token keyword">protected</span> <span class="token keyword">native</span> Object <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException
 <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -767,17 +795,17 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException
 <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">,</span> <span class="token keyword">int</span> nanos<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException
 <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException</code></pre>
-<h2 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h2><ul>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><ul>
 <li>对于基本类型，== 判断两个值是否相等，基本类型没有 equals() 方法。</li>
 <li>对于引用类型，== 判断两个变量是否引用同一个对象，而 equals() 判断引用的对象是否等价。</li>
 </ul>
 <p><strong>“==”和equals的区别</strong></p>
 <p><code>==</code>： 用来判断两个对象的内存地址是否相同（比较的是变量(栈)内存中存放的对象的(堆)内存地址，）。比较的是真正意义上的指针操作。</p>
 <p><code>equals</code>：用来比较的是两个对象的内容是否相等</p>
-<pre><code>String s1 = new String(&quot;ab&quot;); // s1 为一个引用
-String s2 = new String(&quot;ab&quot;); // s2 为另一个引用,对象的内容一样
-String s3 = &quot;ab&quot;; // 放在常量池中
-String s4 = &quot;ab&quot;; // 从常量池中查找
+<pre><code>String s1 = new String("ab"); // s1 为一个引用
+String s2 = new String("ab"); // s2 为另一个引用,对象的内容一样
+String s3 = "ab"; // 放在常量池中
+String s4 = "ab"; // 从常量池中查找
 System.out.println(s1 == s2); // false
 System.out.println(s3 == s4); // true
 System.out.println(s1 == s3); // false
@@ -791,7 +819,7 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
 <li>4 一致性：如果参与比较的对象没任何改变，则对象比较的结果也不应该有任何改变；</li>
 <li>5 非空性：任何非空的引用值X，x.equals(null)的返回值一定为false 。</li>
 </ul>
-<h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h2><p>hashCode() 返回散列值，而 equals() 是用来判断两个对象是否等价。等价的两个对象散列值一定相同，但是散列值相同的两个对象不一定等价。</p>
+<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h3><p>hashCode() 返回散列值，而 equals() 是用来判断两个对象是否等价。等价的两个对象散列值一定相同，但是散列值相同的两个对象不一定等价。</p>
 <p>所以：在覆盖 equals() 方法时应当总是覆盖 hashCode() 方法，保证等价的两个对象散列值也相等。</p>
 <p><strong>为什么要有 hashCode？</strong>因为 <code>hashCode()</code> 的作用就是<strong>获取哈希码</strong>，确定该对象在哈希表中的索引位置</p>
 <p><strong>hashCode（）与equals（）</strong></p>
@@ -802,7 +830,7 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
 <li><strong>因此，equals 方法被覆盖过，则 hashCode 方法也必须被覆盖</strong></li>
 <li>hashCode() 的默认行为是对堆上的对象产生独特值。如果没有重写 hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）</li>
 </ol>
-<h2 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h2><p>clone() 是 Object 的 protected 方法，它不是 public，一个类不显式去重写 clone()，其它类就不能直接去调用该类实例的 clone() 方法。</p>
+<h3 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h3><p>clone() 是 Object 的 protected 方法，它不是 public，一个类不显式去重写 clone()，其它类就不能直接去调用该类实例的 clone() 方法。</p>
 <p>克隆（clone方法）为浅拷贝</p>
 <p><strong>1.浅拷贝</strong>：对基本数据类型进行值拷贝，对引用数据类型的<code>引用地址进行拷贝</code>，拷贝对象和原始对象的引用类型引用同一个对象</p>
 <p><strong>2.深拷贝</strong>： 对基本数据类型进行值拷贝，对引用数据类型的<code>内容进行拷贝</code>，拷贝对象和原始对象的引用类型引用不同对象。</p>
@@ -830,7 +858,25 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
 <li>BeanMap：针对POJO Bean与Map对象间的拷贝。</li>
 <li>BeanGenerator：根据Map&lt;String,Class&gt;properties的属性定义，动态生成POJO Bean类。</li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -855,7 +901,7 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://husycode.cn/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%884%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">http://husycode.cn/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%884%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</a>
+                    <a href="http://husycode.cn/2020/01/04/java-ji-chu-pian-4-shu-ju-lei-xing/">http://husycode.cn/2020/01/04/java-ji-chu-pian-4-shu-ju-lei-xing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -893,12 +939,12 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                    <span class="chip bg-color">面试</span>
+                                <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                                    <span class="chip bg-color">面试考点</span>
                                 </a>
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">Java 基础</span>
                                 </a>
                             
                         </div>
@@ -1066,9 +1112,9 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
 <script src="/libs/gitment/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-    id: 'Sun Jan 05 2020 15:20:36 GMT+0800',
+    id: 'Sat Jan 04 2020 17:21:13 GMT+0800',
     owner: 'husycoding',
-    repo: 'https://github.com/HusyCoding/husycoding.github.io.git',
+    repo: 'husycoding.github.io',
     oauth: {
         client_id: '6e5a7dbb6566fab04e92',
         client_secret: '2f87721f5295987e35e8f84b298c19932216dff1'
@@ -1090,45 +1136,35 @@ gitment.render('gitment-content');
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%884%EF%BC%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+                <a href="/2020/01/05/java-ji-chu-pian-5-lei-jia-zai-he-chu-shi-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Java-基础篇（4）数据类型">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Java-基础篇（5）类加载和初始化">
                         
-                        <span class="card-title">Java-基础篇（4）数据类型</span>
+                        <span class="card-title">Java-基础篇（5）类加载和初始化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在本章中，主要介绍一下 Java 最常用、也是基础考点的数据类型；我们都知道 Java 语言提供了八种基本类型：六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。并且还提供了其对应的引用类型。
-
-基本类型
-
-
-类型
-字节
+                            虚拟机将描述类的数据从.class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型
+类加载在类的加载阶段，即生命周期分：加载、验证、准备、解析、初始化、调用、卸载等七个时期，其中验证、准备、解析
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-category">
-                                    技术栈
-                                </a>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Java/" class="post-category">
+                            <a href="/categories/Java/" class="post-category">
                                     Java
                                 </a>
                             
@@ -1136,16 +1172,15 @@ gitment.render('gitment-content');
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                        <span class="chip bg-color">面试考点</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java 基础</span>
                     </a>
                     
                 </div>
@@ -1159,7 +1194,7 @@ gitment.render('gitment-content');
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%883%EF%BC%89%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97%E7%89%B9%E6%80%A7/">
+                <a href="/2020/01/03/java-ji-chu-pian-3-chang-yong-guan-jian-zi-te-xing/">
                     <div class="card-image">
                         
                         
@@ -1177,17 +1212,13 @@ gitment.render('gitment-content');
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-03
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-category">
-                                    技术栈
-                                </a>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Java/" class="post-category">
+                            <a href="/categories/Java/" class="post-category">
                                     Java
                                 </a>
                             
@@ -1198,12 +1229,12 @@ gitment.render('gitment-content');
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                        <span class="chip bg-color">面试考点</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java 基础</span>
                     </a>
                     
                 </div>
@@ -1301,7 +1332,7 @@ gitment.render('gitment-content');
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
+            headingSelector: 'h1, h2, h3, h4, h5'
         });
 
         // modify the toc link href to support Chinese.
@@ -1313,7 +1344,7 @@ gitment.render('gitment-content');
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1381,7 +1412,8 @@ gitment.render('gitment-content');
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
             <a href="http://husycode.cn" target="_blank">Husy</a>
-           
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
             
@@ -1406,7 +1438,7 @@ gitment.render('gitment-content');
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/husycoding" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/HusyCoding/JNotes" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 

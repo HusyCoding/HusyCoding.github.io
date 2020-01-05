@@ -59,22 +59,22 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
-      <span>标签</span>
+      <span>分类</span>
     </a>
     
   </li>
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/categories" class="waves-effect waves-light">
+    <a href="/tags" class="waves-effect waves-light">
       
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
-      <span>分类</span>
+      <span>标签</span>
     </a>
     
   </li>
@@ -97,6 +97,17 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
     </a>
     
   </li>
@@ -150,22 +161,22 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-tags"></i>
+			    <i class="fa-fw fas fa-bookmark"></i>
 			
-			标签
+			分类
 		</a>
           
         </li>
         
         <li class="m-nav-item">
 	  
-		<a href="/categories" class="waves-effect waves-light">
+		<a href="/tags" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-bookmark"></i>
+			    <i class="fa-fw fas fa-tags"></i>
 			
-			分类
+			标签
 		</a>
           
         </li>
@@ -188,6 +199,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
 		</a>
           
         </li>
@@ -331,20 +353,20 @@
             <div class="tag-chips">
                 
                 
-                <a href="/tags/%E9%9D%A2%E8%AF%95/" title="面试: 4">
+                <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/" title="面试考点: 8">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="面试" style="background-color: #F9EBEA;">面试
-                        <span class="tag-length">4</span>
+                            data-tagname="面试考点" style="background-color: #F9EBEA;">面试考点
+                        <span class="tag-length">8</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/Java/" title="Java: 4">
+                <a href="/tags/Java-%E5%9F%BA%E7%A1%80/" title="Java 基础: 8">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="Java" style="background-color: #F5EEF8;">Java
-                        <span class="tag-length">4</span>
+                            data-tagname="Java 基础" style="background-color: #F5EEF8;">Java 基础
+                        <span class="tag-length">8</span>
                     </span>
                 </a>
                 
@@ -372,7 +394,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"面试","weight":4,"link":"http://husycode.cn/tags/面试/"},{"text":"Java","weight":4,"link":"http://husycode.cn/tags/Java/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"面试考点","weight":8,"link":"http://husycode.cn/tags/面试考点/"},{"text":"Java 基础","weight":8,"link":"http://husycode.cn/tags/Java-基础/"}], {
         autoResize: true
     });
 </script>
@@ -387,7 +409,8 @@
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
             <a href="http://husycode.cn" target="_blank">Husy</a>
-           
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
             
@@ -412,7 +435,7 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/husycoding" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/HusyCoding/JNotes" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 

@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java-基础篇（2）三大特性和六大原则, Husy">
-    <meta name="description" content="三大特性在 Java 编程中三大特性指的是封装、继承、多态
-
-封装：封装把一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，如果属性不想被外界访问，我们大可不必提供方法给外界访问优点：减少耦合，代码重用，减轻维护
-继承：它可以使">
+    <meta name="keywords" content="Java-基础篇（7）反射, Husy">
+    <meta name="description" content="反射定义在 Java 中的反射机制是指在运行状态中，对于任意一个类都能够知道这个类所有的属性和方法；并且对于任意一个对象，都能够调用它的任意一个方法；
+这种动态获取信息以及动态调用对象方法的功能成为 Java 语言的反射机制。
+Class ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Java-基础篇（2）三大特性和六大原则 | Husy</title>
+    <title>Java-基础篇（7）反射 | Husy</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -62,22 +61,22 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
+    <a href="/categories" class="waves-effect waves-light">
       
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
-      <span>标签</span>
+      <span>分类</span>
     </a>
     
   </li>
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/categories" class="waves-effect waves-light">
+    <a href="/tags" class="waves-effect waves-light">
       
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
-      <span>分类</span>
+      <span>标签</span>
     </a>
     
   </li>
@@ -100,6 +99,17 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
     </a>
     
   </li>
@@ -153,22 +163,22 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
+		<a href="/categories" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-tags"></i>
+			    <i class="fa-fw fas fa-bookmark"></i>
 			
-			标签
+			分类
 		</a>
           
         </li>
         
         <li class="m-nav-item">
 	  
-		<a href="/categories" class="waves-effect waves-light">
+		<a href="/tags" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-bookmark"></i>
+			    <i class="fa-fw fas fa-tags"></i>
 			
-			分类
+			标签
 		</a>
           
         </li>
@@ -191,6 +201,17 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
 		</a>
           
         </li>
@@ -284,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java-基础篇（2）三大特性和六大原则</h1>
+                    <h1 class="description center-align post-title">Java-基础篇（7）反射</h1>
                 </div>
             </div>
         </div>
@@ -406,12 +427,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                <span class="chip bg-color">面试</span>
+                            <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                                <span class="chip bg-color">面试考点</span>
                             </a>
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">Java 基础</span>
                             </a>
                         
                     </div>
@@ -422,11 +443,7 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-category">
-                                技术栈
-                            </a>
-                        
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Java/" class="post-category">
+                            <a href="/categories/Java/" class="post-category">
                                 Java
                             </a>
                         
@@ -446,7 +463,17 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    730
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
 				
                 
@@ -461,40 +488,85 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h1><p>在 Java 编程中三大特性指的是<strong>封装、继承、多态</strong></p>
+                <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在 Java 中的反射机制是指在运行状态中，对于任意一个类都能够知道这个类所有的属性和方法；并且对于任意一个对象，都能够调用它的任意一个方法；</p>
+<p>这种动态获取信息以及动态调用对象方法的功能成为 Java 语言的反射机制。</p>
+<p><code>Class</code> 和 <code>java.lang.reflect</code> 一起对反射提供了支持，<code>java.lang.reflect</code> 类库主要包含了以下三个类：</p>
 <ul>
-<li>封装：封装把一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，如果属性不想被外界访问，我们大可不必提供方法给外界访问优点：减少耦合，代码重用，减轻维护</li>
-<li>继承：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</li>
-<li>多态：指允许不同类的对象对同一消息做出响应。</li>
+<li>Field 类：表示类的成员变量，可以用来获取和设置类之中的属性值。</li>
+<li>Method 类：表示类的方法，它可以用来获取类中的方法信息或者执行方法。</li>
+<li>Constructor 类： 表示类的构造方法。</li>
 </ul>
-<hr>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态一般分为编译时多态和运行时多态，编译时主要指方法的重载；运行时主要指程序中定义的对象引用所指向的具体类型在运行期间才确定</p>
-<p><strong>运行时多态有三个条件：继承、覆盖和重写、向上转型（父类引用指向子类对象）</strong></p>
-<hr>
-<h2 id="方法重载和重写区别"><a href="#方法重载和重写区别" class="headerlink" title="方法重载和重写区别"></a>方法重载和重写区别</h2><p>重写：<strong>发生在继承类中，方法名和参数列表相同</strong>，重写有以下三个限制：</p>
+<p><strong>反射的优点：</strong></p>
 <ul>
-<li>子类方法的访问权限必须大于等于父类方法；</li>
-<li>子类方法的返回类型必须是父类方法返回类型或为其子类型。</li>
-<li>子类方法抛出的异常类型必须是父类抛出异常类型或为其子类型。</li>
+<li><strong>能够运行时动态获取类的实例，大大提高系统的灵活性和扩展性。</strong></li>
+<li>与Java动态编译相结合，可以实现无比强大的功能</li>
 </ul>
-<p>重载：<strong>发生在同一个类中，方法名相同，参数列表不同（个数、类型、顺序），与权限修饰、返回值类型、抛出异常无关</strong></p>
-<p><strong>注意</strong>：构造器是不可以被重写的，但是能重载。</p>
-<p>构造方法有哪些特性？</p>
+<p><strong>反射的缺点：</strong></p>
+<ul>
+<li><strong>性能开销</strong> ：反射涉及了动态类型的解析，所以 JVM 无法对这些代码进行优化。因此，反射操作的效率要比那些非反射操作低得多。</li>
+<li><strong>安全限制</strong> ：使用反射技术要求程序必须在一个没有安全限制的环境中运行。如果一个程序必须在有安全限制的环境中运行，如 Applet，那么这就是个问题了。</li>
+<li><strong>内部暴露</strong> ：破坏了类的封装性，可以通过反射获取这个类的私有方法和属性</li>
+</ul>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p><strong>在 Java 中反射有 3 中获取 <code>Class</code> 的实现方式</strong>，如下：</p>
 <ol>
-<li>名字与类名相同。</li>
-<li>没有返回值，但不能用void声明构造函数。</li>
-<li>生成类的对象时自动执行，无需调用。</li>
+<li><p>调用某个对象的 <code>getClass()</code>方法</p>
+<pre class=" language-java"><code class="language-java"> Person p<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ Class <span class="token class-name">clazz</span><span class="token operator">=</span>p<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</li>
+<li><p>调用某个类的 class 属性来获取该类对应的 Class 对象</p>
+<pre class=" language-java"><code class="language-java"> Class <span class="token class-name">clazz</span><span class="token operator">=</span>Person<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">;</span></code></pre>
+</li>
+<li><p>使用 Class 类中的 <code>forName()</code>静态方法是最安全、性能最好，最常用的一种方式</p>
+<pre class=" language-java"><code class="language-java"> Class <span class="token class-name">clazz</span><span class="token operator">=</span>Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"类的全路径"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre>
+</li>
 </ol>
-<hr>
-<h1 id="六大原则"><a href="#六大原则" class="headerlink" title="六大原则"></a>六大原则</h1><ol>
-<li><strong>开闭原则</strong>：对扩展开发放，对修改关闭，要求在添加新功能时不需要修改代码，符合开闭原则最典型的设计模式是装饰者模式</li>
-<li><strong>单一职责原则</strong>：一个类只负责一件事，尽量使用合成/聚合的方式，而不是使用继承。</li>
-<li><strong>里式替换原则</strong> ：任何基类可以出现的地方，子类一定可以出现。</li>
-<li><strong>依赖倒转原则</strong>：依赖于抽象而不依赖于具体</li>
-<li><strong>接口隔离原则</strong>：使用多个隔离的接口，比使用单个接口要好 ，不应该强迫客户依赖于它们不用的方法。</li>
-<li><strong>迪米特法则</strong>：一个软件实体应当尽可能少地与其他实体发生相互作用。</li>
+<p><strong>Class 创建对象的 2 种方式</strong></p>
+<ol>
+<li>使用 Class 对象的 <code>newInstance()</code></li>
+<li>先使用 Class 对象获取指定的 Constructor 对象，再调用 Constructor 对象的 newInstance()</li>
 </ol>
-
+<h2 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//获取 Person 类的 Class 对象</span>
+Class <span class="token class-name">clazz</span><span class="token operator">=</span>Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"reflection.Person"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//获取 Person 类的所有方法信息</span>
+Method<span class="token punctuation">[</span><span class="token punctuation">]</span> method<span class="token operator">=</span>clazz<span class="token punctuation">.</span><span class="token function">getDeclaredMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>Method m<span class="token operator">:</span>method<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//获取 Person 类的所有成员属性信息</span>
+Field<span class="token punctuation">[</span><span class="token punctuation">]</span> field<span class="token operator">=</span>clazz<span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>Field f<span class="token operator">:</span>field<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//获取 Person 类的所有构造方法信息</span>
+Constructor<span class="token punctuation">[</span><span class="token punctuation">]</span> constructor<span class="token operator">=</span>clazz<span class="token punctuation">.</span><span class="token function">getDeclaredConstructors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>Constructor c<span class="token operator">:</span>constructor<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//使用.newInstane 方法创建对象</span>
+Person p<span class="token operator">=</span><span class="token punctuation">(</span>Person<span class="token punctuation">)</span> clazz<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//获取构造方法并创建对象</span>
+Constructor c<span class="token operator">=</span>clazz<span class="token punctuation">.</span><span class="token function">getDeclaredConstructor</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>String<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//创建对象并设置属性</span>
+Person p1<span class="token operator">=</span><span class="token punctuation">(</span>Person<span class="token punctuation">)</span> c<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token string">"李四"</span><span class="token punctuation">,</span><span class="token string">"男"</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -519,7 +591,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://husycode.cn/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%882%EF%BC%89%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7%E5%92%8C%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99/">http://husycode.cn/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%882%EF%BC%89%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7%E5%92%8C%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99/</a>
+                    <a href="http://husycode.cn/2020/01/05/java-ji-chu-pian-7-fan-she/">http://husycode.cn/2020/01/05/java-ji-chu-pian-7-fan-she/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -557,12 +629,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                    <span class="chip bg-color">面试</span>
+                                <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                                    <span class="chip bg-color">面试考点</span>
                                 </a>
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">Java 基础</span>
                                 </a>
                             
                         </div>
@@ -730,9 +802,9 @@
 <script src="/libs/gitment/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-    id: 'Sun Jan 05 2020 15:11:12 GMT+0800',
+    id: 'Sun Jan 05 2020 17:58:32 GMT+0800',
     owner: 'husycoding',
-    repo: 'https://github.com/HusyCoding/husycoding.github.io.git',
+    repo: 'husycoding.github.io',
     oauth: {
         client_id: '6e5a7dbb6566fab04e92',
         client_secret: '2f87721f5295987e35e8f84b298c19932216dff1'
@@ -758,20 +830,21 @@ gitment.render('gitment-content');
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%883%EF%BC%89%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97%E7%89%B9%E6%80%A7/">
+                <a href="/2020/01/05/java-ji-chu-pian-8-yi-chang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Java-基础篇（3）常用关键字特性">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Java-基础篇（8）异常">
                         
-                        <span class="card-title">Java-基础篇（3）常用关键字特性</span>
+                        <span class="card-title">Java-基础篇（8）异常</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本章中主要了解一下我们在开发过程中常用，也必须掌握的一些特殊关键字的作用。
-访问权限在Java中有4中访问权限的修饰符：private、default（(默认一般省略）、public、protected。一般用于对类或类中的成员（字段以及方
+                            异常分类Throwable 是 Java 语言中所有错误或异常的超类。下一层分为 Error 和 Exception
+
+Error：用来表示 JVM 无法处理的错误，是指 java 运行时系统的内部错误和资源耗尽错误。应用程序不会抛出该类对
                         
                     </div>
                     <div class="publish-info">
@@ -782,11 +855,7 @@ gitment.render('gitment-content');
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-category">
-                                    技术栈
-                                </a>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Java/" class="post-category">
+                            <a href="/categories/Java/" class="post-category">
                                     Java
                                 </a>
                             
@@ -797,12 +866,12 @@ gitment.render('gitment-content');
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                        <span class="chip bg-color">面试考点</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java 基础</span>
                     </a>
                     
                 </div>
@@ -816,23 +885,22 @@ gitment.render('gitment-content');
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/05/Java-%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%881%EF%BC%89%E6%80%BB%E7%BA%B2/">
+                <a href="/2020/01/05/java-ji-chu-pian-6-luo-ji-yun-suan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Java-基础篇（1）总纲">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Java-基础篇（6）逻辑运算">
                         
-                        <span class="card-title">Java-基础篇（1）总纲</span>
+                        <span class="card-title">Java-基础篇（6）逻辑运算</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ​        Java 篇章中，一般我们面试时都会考察我们掌握的基础点，看是否基础牢固，决定了我们是不是能进一步的交流，如果一个人的基础都牢固，那面试官肯定不要你。
-以下我们从以下几个方便来巩固以下我们的技术点：
+                            在本篇章中会从参数传递、++ 和 += 运算、try/catch、循环、switch 等方面讲述来讲述一下，在 Java 中的一些逻辑运算规则
+参数传递在 Java 中，方法参数传递过程，其实是传递一个副本值过程，所以有2种结果
 
-三大特性和六大原则
-
+基本数据
                         
                     </div>
                     <div class="publish-info">
@@ -843,11 +911,7 @@ gitment.render('gitment-content');
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-category">
-                                    技术栈
-                                </a>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%A0%88/Java/" class="post-category">
+                            <a href="/categories/Java/" class="post-category">
                                     Java
                                 </a>
                             
@@ -858,12 +922,12 @@ gitment.render('gitment-content');
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
+                        <span class="chip bg-color">面试考点</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java 基础</span>
                     </a>
                     
                 </div>
@@ -961,7 +1025,7 @@ gitment.render('gitment-content');
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
             collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
+            headingSelector: 'h1, h2, h3, h4, h5'
         });
 
         // modify the toc link href to support Chinese.
@@ -973,7 +1037,7 @@ gitment.render('gitment-content');
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -1041,7 +1105,8 @@ gitment.render('gitment-content');
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
             <a href="http://husycode.cn" target="_blank">Husy</a>
-           
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
             
@@ -1066,7 +1131,7 @@ gitment.render('gitment-content');
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/husycoding" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/HusyCoding/JNotes" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
