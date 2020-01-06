@@ -1096,33 +1096,33 @@ System.out.println(s1.equals(s3)); // true</code></pre><p>对equals重新需要�
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
-    
-        <link rel="stylesheet" href="/libs/gitment/gitment-default.css">
-<link rel="stylesheet" href="/css/gitment.css">
-
-<div class="gitment-card card" data-aos="fade-up">
+<div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="gitment-content" class="card-content"></div>
+    <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="/libs/gitment/gitment.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
-var gitment = new Gitment({
-    id: 'Sat Jan 04 2020 17:21:13 GMT+0800',
-    owner: 'husycoding',
-    repo: 'husycoding.github.io',
-    oauth: {
-        client_id: '6e5a7dbb6566fab04e92',
-        client_secret: '2f87721f5295987e35e8f84b298c19932216dff1'
-    }
-});
+    let gitalk = new Gitalk({
+        clientID: '6e5a7dbb6566fab04e92',
+        clientSecret: '2f87721f5295987e35e8f84b298c19932216dff1',
+        repo: 'husycoding.github.io',
+        owner: 'husycoding',
+        admin: null,
+        id: '2020-01-04T17-21-13',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
 
-gitment.render('gitment-content');
+    gitalk.render('gitalk-container');
 </script>
+    
+
     
 
     
