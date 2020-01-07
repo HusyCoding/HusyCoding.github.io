@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java-基础篇（3）常用关键字特性, Husy">
-    <meta name="description" content="本章中主要了解一下我们在开发过程中常用，也必须掌握的一些特殊关键字的作用。
-访问权限在Java中有4中访问权限的修饰符：private、default（(默认一般省略）、public、protected。一般用于对类或类中的成员（字段以及方">
+    <meta name="keywords" content="JVM（3）GC 回收机制, Husy">
+    <meta name="description" content="在 JVM 中 GC 的回收机制也是非常重要的一块，废话不多说，先上张图
+
+如何确定垃圾1. 引用计数法
+每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Java-基础篇（3）常用关键字特性 | Husy</title>
+    <title>JVM（3）GC 回收机制 | Husy</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java-基础篇（3）常用关键字特性</h1>
+                    <h1 class="description center-align post-title">JVM（3）GC 回收机制</h1>
                 </div>
             </div>
         </div>
@@ -430,8 +432,8 @@
                                 <span class="chip bg-color">面试考点</span>
                             </a>
                         
-                            <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
-                                <span class="chip bg-color">Java 基础</span>
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
                             </a>
                         
                     </div>
@@ -442,8 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Java/" class="post-category">
-                                Java
+                            <a href="/categories/JVM/" class="post-category">
+                                JVM
                             </a>
                         
                     </div>
@@ -455,7 +457,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-03
+                    2020-01-07
                 </div>
                 
 
@@ -464,14 +466,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    3.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    11 分
                 </div>
                 
 				
@@ -487,177 +489,132 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本章中主要了解一下我们在开发过程中常用，也必须掌握的一些特殊关键字的作用。</p>
-<h2 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h2><p>在Java中有4中访问权限的修饰符：<strong>private</strong>、<strong>default</strong>（(默认一般省略）、<strong>public</strong>、<strong>protected</strong>。一般用于对类或类中的成员（字段以及方法）加上访问修饰符</p>
-<p>权限的主要作用范围：同一个类中、同一个包下、父子类、不同的包</p>
-<p>可被修饰对象：类和成员变量；类可见表示其它类可以用这个类创建实例对象；成员可见表示其它类可以用这个类的实例对象访问到该成员。</p>
-<p><strong>4种修饰符的权限范围：</strong></p>
-<blockquote>
+                <p>在 JVM 中 GC 的回收机制也是非常重要的一块，废话不多说，先上张图</p>
+<p><img src="clipboard.png" alt="JVM  GC "></p>
+<h1 id="如何确定垃圾"><a href="#如何确定垃圾" class="headerlink" title="如何确定垃圾"></a>如何确定垃圾</h1><p><strong>1. 引用计数法</strong></p>
+<p>每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。</p>
+<p><strong>2.</strong>  <strong>可达性分析</strong></p>
+<p>为了解决引用计数法的循环引用问题，Java 使用了可达性分析的方法。通过一系列的<code>GC roots</code>对象作为起点搜索。<strong>如果在<code>GC roots</code>和一个对象之间没有可达路径，则称该对象是不可达的</strong>。</p>
+<p>要注意的是，<strong>不可达对象不等价于可回收对象</strong>，不可达对象变为可回收对象<strong>至少要经过两次标记过程</strong>。两次标记后仍然是可回收对象，则将面临回收。</p>
+<h2 id="GC对象标记过程"><a href="#GC对象标记过程" class="headerlink" title="GC对象标记过程"></a><strong>GC对象标记过程</strong></h2><p><strong>第一次标记：</strong></p>
 <ul>
-<li>private：指”私有的”。被其修饰的属性以及方法只能被该类的对象访问，其子类不能访问，更不能允许跨包访问</li>
-<li>default：即不加任何访问修饰符，通常称为“默认访问权限“或者“包访问权限”。该模式下，只允许在同一个包中进行访问。</li>
-<li>protected: 介于public 和 private 之间的一种访问修饰符，一般称之为“保护访问权限”。被其修饰的属性以及方法只能被类本身的方法及子类访问，即使子类在不同的包中也可以访问。</li>
-<li>public： Java语言中访问限制最宽的修饰符，一般称之为“公共的”。被其修饰的类、属性以及方法不仅可以跨类访问，而且允许跨包访问。</li>
+<li>如果对象在可达性分析后没有与GC Roots相连接的引用链，将<strong>第一次被标记</strong>，并进行一次筛选，筛选条件为<strong>是否有必要执行finalize()方法</strong>，</li>
+<li>没有必要执行finalize()方法，便将这对象<strong>放置F-Queue队列</strong>中，并在稍后由一个虚拟机自动建立的、低优先级的Finalizer线程去执行它（指触发这个方法）；</li>
+<li>“没必要执行”的两种情况：<strong>当对象没有覆盖finalize()</strong>，或者此方法<strong>已经被虚拟机调用过</strong></li>
 </ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>修饰符</th>
-<th>同类</th>
-<th align="left">同包</th>
-<th>子类</th>
-<th>不同包非子类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>private</td>
-<td>√</td>
-<td align="left">×</td>
-<td>×</td>
-<td>×</td>
-</tr>
-<tr>
-<td>default</td>
-<td>√</td>
-<td align="left">√</td>
-<td>×</td>
-<td>×</td>
-</tr>
-<tr>
-<td>protected</td>
-<td>√</td>
-<td align="left">√</td>
-<td>√</td>
-<td>×</td>
-</tr>
-<tr>
-<td>public</td>
-<td>√</td>
-<td align="left">√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-</tbody></table>
-<p>从上表中我们很容易看出，权限范围从小到大依次为：<strong>private &lt; default &lt; protected &lt; public</strong></p>
-<hr>
-<h2 id="final-和-static"><a href="#final-和-static" class="headerlink" title="final 和 static"></a>final 和 static</h2><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>在Java中，final关键字可以用来修饰类、方法和变量（包括成员变量和局部变量）</p>
+<p><strong>第二次标记：</strong></p>
 <ul>
-<li><strong>修饰变量</strong>：表示常量，对于基本类型，final 使数值不变；对于引用类型，final 使引用地址不变，但对象本身的属性是可以被修改的。</li>
-<li><strong>修饰方法</strong>：不能被子类的方法重写，但可以被继承，<strong>不能修饰构造方法</strong>。。</li>
-<li><strong>修饰类</strong> ：该不能被继承，没有子类，final类中的方法默认是final的。Java中的String类就是一个final类</li>
+<li>稍后GC将对F-Queue中的对象进行<strong>第二次标记</strong>，如果对象在finalize()方法中成功拯救自己（重新与引用链上的任一对象建立关联），它将被移出“即将回收”集合，否则，被回收</li>
 </ul>
-<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>在Java语言中，static 可以用来修饰成员变量和成员方法，当然也可以是静态代码块</p>
+<h2 id="GC-Roots的对象"><a href="#GC-Roots的对象" class="headerlink" title="GC Roots的对象"></a>GC Roots的对象</h2><ul>
+<li>虚拟机栈中引用的对象、</li>
+<li>方法区中类静态属性</li>
+<li>常量的引用的对象、</li>
+<li>本地方法栈中JNI（native接口）引用的对象。</li>
+</ul>
+<p><strong>总结</strong>：</p>
 <ul>
-<li><strong>静态变量</strong>：又称为类变量，该类的所有实例都共享本类的静态变量，且在内存中只存在一份</li>
-<li><strong>静态方法</strong>：在类加载的时候就存在了，它不依赖于任何实例，只能访问所属类的静态字段和静态方法，方法中不能有 this 和 super 关键字（此时可能没有实例）。</li>
-<li><strong>静态语句块</strong>：在类初始化时运行一次。</li>
-<li><strong>静态内部类</strong>：非静态内部类依赖于外部类的实例，而静态内部类不需要。静态内部类不能访问外部类的非静态的变量和方法。</li>
+<li>根据向下搜索方法判断引用链不可达 </li>
+<li>再判断是否有必要执行finalize()方法，</li>
+<li>没有必要执行，进入f-queue队列 </li>
+<li>再次判断与GCRoot有链接 </li>
+<li>没有回收</li>
 </ul>
-<p><strong>使用时注意：</strong></p>
+<h1 id="对象引用关系"><a href="#对象引用关系" class="headerlink" title="对象引用关系"></a>对象引用关系</h1><p>无论通过引用计数算法还是可达性分析算法，来判读对象是否存活，都与引用相关；</p>
+<p>引用分：<strong>强引用、软引用、弱引用、虚引用；引用强度依次减弱</strong></p>
+<ul>
+<li>强引用：<strong>永远不会被回收</strong>，类似“Object obj = new Object()”的引用，强引用是造成 Java 内存泄漏的主要原因之一</li>
+<li>软引用： <strong>内存不足回收</strong> ，用来描述一些还有用但是并非必须的对象， 通过SoftReference类实现</li>
+<li>弱引用： <strong>只能生存到下一次垃圾收集之前</strong>，只要垃圾回收机制一运行，不管 JVM 的内存空间是否足够，总会回收该对象占用的内存。 用来描述非必须的对象，通过WeakReference类实现，</li>
+<li>虚引用： <strong>无影响</strong>，无法通过虚引用获取对象实例，其目的为了能在对象被回收时收到一个系统通知，通过PhantomReference类实现</li>
+</ul>
+<h1 id="GC-算法"><a href="#GC-算法" class="headerlink" title="GC 算法"></a>GC 算法</h1><p>共有 4 种：<strong>标记-清除算法、复制算法、标记-整理算法、分代收集算法</strong></p>
+<h2 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h2><ul>
+<li>算法分为“标记”和“清除”两个阶段</li>
+<li>缺点：效率不高，<strong>产生大量不连续的内存碎片</strong></li>
+</ul>
+<p><img src="clipboard-1578404417512.png" alt="标记-清除算法"></p>
+<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><p>为了解决 Mark-Sweep 算法内存碎片化的缺陷而被提出的算法。按内存容量将内存划分为等大小</p>
+<p>的两块。每次只使用其中一块，当这一块内存满后将尚存活的对象复制到另一块上去，把已使用</p>
+<p>的内存清掉</p>
+<ul>
+<li>内存效率高，不易产生碎片，当大量存活对象时会进行较多次复制操作，效率大大降低。</li>
+<li><strong>需要分配担保</strong>：survivor空间不足时，需要老年代进行分配担保，来保证所有对象有存活的情况</li>
+<li><strong>gc过程简单，运行高效</strong> ,不需要考虑内存碎片等复杂情况</li>
+</ul>
+<p><img src="clipboard-1578404442145.png" alt="复制算法"></p>
+<h2 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h2><p>结合了以上两个算法，为了避免缺陷而提出。标记阶段和 Mark-Sweep 算法相同，标记后不是清</p>
+<p>理对象，而是将存活对象移向内存的一端。然后清除端边界外的对象</p>
+<p><img src="clipboard-1578404472763.png" alt="标记-整理算法"></p>
+<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p>分代收集法是目前大部分 JVM 所采用的方法，其核心思想是根据对象存活的不同生命周期将内存划分为不同的域，一般情况下将 GC 堆划分为<strong>老生代</strong>(Tenured/Old Generation)和<strong>新生代</strong>(Young Generation)。</p>
+<p><strong>老生代的特点：是每次垃圾回收时只有少量对象需要被回收，</strong></p>
+<p><strong>新生代的特点：是每次垃圾回收时都有大量垃圾需要被回收，</strong></p>
+<p>因此可以根据不同区域选择不同的算法。</p>
+<p><strong>新生代与复制算法</strong></p>
+<p>​        目前大部分 JVM 的 GC 对于新生代都采取 Copying 算法，<strong>因为新生代中每次垃圾回收都要回收大部分对象，即要复制的操作比较少</strong>，但通常并不是按照 1：1 来划分新生代。一般将新生代划分为一块较大的 Eden 空间和两个较小的 Survivor 空间(From Space, To Space)，每次使用Eden 空间和其中的一块 Survivor 空间，当进行回收时，将该两块空间中还存活的对象复制到另一块 Survivor 空间中。</p>
+<p><strong>老年代与标记复制算法</strong></p>
+<p>​        老年代因为每次只回收少量对象，因为对象存活率高、没有额外空间对它进行分配担保, 就必须采用“标记—清理”或“标记—整理”算法来进行回收, 不必进行内存复制, 且直接腾出空闲内存.</p>
 <ol>
-<li>静态变量，静态方法可以通过类名直接访问</li>
-<li>初始化顺序：静态变量和静态语句块优先于实例变量和普通语句块，静态变量和静态语句块的初始化顺序取决于它们在代码中的顺序。（此处不演示，在类初始化篇章中演示）</li>
+<li><p>JAVA 虚拟机提到过的处于方法区的永生代(Permanet Generation)，它用来存储 class 类，常量，方法描述等。对永生代的回收主要包括废弃常量和无用的类。</p>
+</li>
+<li><p>对象的内存分配主要在新生代的 Eden Space 和 Survivor Space 的 From Space(Survivor 目前存放对象的那一块)，少数情况会直接分配到老生代。</p>
+</li>
+<li><p>当新生代的 Eden Space 和 From Space 空间不足时就会发生一次 GC，进行 GC 后，Eden Space 和 From Space 区的存活对象会被挪到 To Space，然后将 Eden Space 和 From Space 进行清理。</p>
+</li>
+<li><p>如果 To Space 无法足够存储某个对象，则将这个对象存储到老生代。</p>
+</li>
+<li><p>在进行 GC 后，使用的便是 Eden Space 和 To Space 了，如此反复循环。</p>
+</li>
+<li><p>当对象在 Survivor 区躲过一次 GC 后，其年龄就会+1。默认情况下年龄到达 15 的对象会被移到老生代中。</p>
+</li>
 </ol>
-<p><strong>问：在一个静态方法内调用一个非静态成员为什么是非法的?</strong></p>
-<p>由于静态方法可以不通过对象进行调用，因此在静态方法里，不能调用其他非静态变量，也不可以访问非静态变量成员。</p>
-<h3 id="成员变量、静态变量、局部变量的区别"><a href="#成员变量、静态变量、局部变量的区别" class="headerlink" title="成员变量、静态变量、局部变量的区别"></a><strong>成员变量、静态变量、局部变量的区别</strong></h3><p>从生命周期比较：</p>
+<h2 id="分区收集算法"><a href="#分区收集算法" class="headerlink" title="分区收集算法"></a><strong>分区收集算法</strong></h2><p>分区算法则将整个堆空间划分为连续的不同小区间, 每个小区间独立使用, 独立回收.</p>
+<p>这样做的好处是可以控制一次回收多少个小区间 , 根据目标停顿时间, 每次合理地回收若干个小区间(而不是整个堆), 从而减少一次 GC 所产生的停顿。</p>
+<h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p><img src="clipboard-1578404707683.png" alt="垃圾收集器"></p>
+<h2 id="Serial-垃圾收集器（单线程、复制算法）"><a href="#Serial-垃圾收集器（单线程、复制算法）" class="headerlink" title="Serial 垃圾收集器（单线程、复制算法）"></a>Serial <strong>垃圾收集器（单线程、复制算法）</strong></h2><p>​        Serial 垃圾收集器虽然在收集垃圾过程中需要暂停所有其他的工作线程，但是它简单高效，对于限定单个 CPU 环境来说，没有线程交互的开销，可以获得最高的单线程垃圾收集效率，</p>
+<p>​        因此 Serial垃圾收集器依然是 java 虚拟机运行在 Client 模式下<strong>默认的新生代垃圾收集器</strong>。</p>
+<h2 id="ParNew-垃圾收集器（Serial-多线程）"><a href="#ParNew-垃圾收集器（Serial-多线程）" class="headerlink" title="ParNew 垃圾收集器（Serial+多线程）"></a>ParNew 垃圾收集器（Serial+多线程）</h2><p>​        ParNew 垃圾收集器其实<strong>是 Serial 收集器的多线程版本</strong></p>
+<p>​        ParNew 收集器默认开启和 CPU 数目相同的线程数，可以通过-XX:ParallelGCThreads 参数来限制垃圾收集器的线程数。【Parallel：平行的】，是很多 java虚拟机运行在 Server 模式下新生代的默认垃圾收集器。</p>
+<h2 id="Parallel-Scavenge-收集器（多线程复制算法、高效）"><a href="#Parallel-Scavenge-收集器（多线程复制算法、高效）" class="headerlink" title="Parallel Scavenge 收集器（多线程复制算法、高效）"></a>Parallel Scavenge 收集器（多线程复制算法、高效）</h2><p>​        是一个新生代垃圾收集器，同样使用复制算法，也是一个多线程的垃圾收集器，</p>
+<p>​        它<strong>重点关注的是程序达到一个可控制的吞吐量</strong>（Thoughput，CPU 用于运行用户代码的时间/CPU 总消耗时间，即吞吐量=运行用户代码时间/(运行用户代码时间+垃圾收集时间)），高吞吐量可以最高效率地利用 CPU 时间，尽快地完成程序的运算任务，</p>
+<p>主要适用于在后台运算而不需要太多交互的任务。自适应调节策略也是 ParallelScavenge 收集器与 ParNew 收集器的一个重要区别。</p>
+<h2 id="Serial-Old-收集器（单线程标记整理算法-）"><a href="#Serial-Old-收集器（单线程标记整理算法-）" class="headerlink" title="Serial Old 收集器（单线程标记整理算法 ）"></a>Serial Old 收集器（单线程标记整理算法 ）</h2><p>​        <strong>Serial Old 是 Serial 垃圾收集器年老代版本，它同样是个单线程的收集器</strong>，使使用标记-整理算法，这个收集器也主要是运行在 Client 默认的 java 虚拟机默认的年老代垃圾收集器。</p>
+<h2 id="Parallel-Old-收集器（多线程标记整理算法）"><a href="#Parallel-Old-收集器（多线程标记整理算法）" class="headerlink" title="Parallel Old 收集器（多线程标记整理算法）"></a>Parallel Old 收集器（多线程标记整理算法）</h2><p>Parallel Old 收集器是Parallel Scavenge的年老代版本</p>
+<p>Parallel Old 正是为了在年老代同样提供吞吐量优先的垃圾收集器，如果系统对吞吐量要求比较高，可以优先考虑新生代 Parallel Scavenge和年老代 Parallel Old 收集器的搭配策略。</p>
+<h2 id="CMS-收集器（多线程标记清除算法）"><a href="#CMS-收集器（多线程标记清除算法）" class="headerlink" title="CMS 收集器（多线程标记清除算法）"></a>CMS 收集器（多线程标记清除算法）</h2><p>Concurrent mark sweep(CMS)收集器是一种年老代垃圾收集器，其<strong>最主要目标是获取最短垃圾回收停顿时间</strong>，和其他年老代使用标记-整理算法不同，它使用<strong>多线程的标记-清除算法</strong>。最短的垃圾收集停顿时间可以为交互比较高的程序提高用户体验。</p>
+<p><strong>优点</strong>：并发收集、低停顿；</p>
+<p><strong>缺点</strong>：对CPU资源非常敏感，无法清除浮动垃圾，产生大量空间碎片；标记 - 清除算法导致的空间碎片，往往出现老年代空间剩余，但无法找到足够大连续空间来分配当前对象，不得不提前触发一次 Full GC</p>
+<p>CMS 工作机制相比其他的垃圾收集器来说更复杂，整个过程分为以下 4 个阶段：</p>
 <ul>
-<li>静态变量可以被对象调用，也可以被类名调用。以static关键字申明的变量，其独立在对象之外，有许多对象共享的变量。在对象产生之前产生，存在于<strong>方法区静态区中</strong>。</li>
-<li>成员变量只能被对象调用。随着对象创建而存在，随对象销毁而销毁。存在于<strong>堆栈内存中</strong></li>
-<li>局部变量在方法或语句块中申明的变量，生命周期只在定义的{}之中，不能跨方法或语句块使用。</li>
+<li><strong>初始标记：</strong>只是标记一下 GC Roots 能直接关联的对象，速度很快，仍然需要暂停所有的工作线程。</li>
+<li><strong>并发标记：</strong>进行 GC Roots 跟踪的过程，和用户线程一起工作，不需要暂停工作线程。</li>
+<li><strong>重新标记：</strong>为了修正在并发标记期间，因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，仍然需要暂停所有的工作线程。</li>
+<li><strong>并发清除：</strong>清除 GC Roots 不可达对象，和用户线程一起工作，不需要暂停工作线程。由于耗时最长的并发标记和并发清除过程中，垃圾收集线程可以和用户现在一起并发工作，所以总体上来看CMS 收集器的内存回收和用户线程是一起并发地执行。</li>
 </ul>
-<p>从访问权限比较：</p>
-<ul>
-<li><strong>静态变量称为对象的共享数据</strong>，成员变量可以称为对象的特有数据，局部变量为方法所有</li>
-<li>成员变量可以被 public,private,static 等修饰符所修饰，而局部变量不能被访问控制修饰符及 static 所修饰；但是，成员变量和局部变量都能被 final 所修饰。</li>
-</ul>
-<hr>
-<h2 id="abstract-和-interface"><a href="#abstract-和-interface" class="headerlink" title="abstract 和 interface"></a>abstract 和 interface</h2><h3 id="abstract"><a href="#abstract" class="headerlink" title="abstract"></a>abstract</h3><p>在 Java 中 abstract 即抽象，一般使用 <code>abstract</code> 关键字修饰的类或方法</p>
-<p>修饰的类时</p>
-<blockquote>
+<h2 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h2><p>Garbage first 垃圾收集器是目前垃圾收集器理论发展的最前沿成果，相比与 CMS 收集器，G1 收集器两个最突出的改进是：</p>
 <ol>
-<li>不能被实例化，需要继承抽象类才能实例化其子类。</li>
-<li>访问权限可以使用<code>public</code>、<code>private</code>、<code>protected</code>，其表达形式为：（public）abstract class 类名{} </li>
-<li>抽象类不能使用final关键字修饰，因为final修饰的类是无法被继承</li>
-<li>可以定义构造方法、静态方法、普通方法；非抽象的普通成员变量、静态成员变量</li>
+<li><p>基于标记-整理算法，<strong>不产生内存碎片。</strong></p>
+</li>
+<li><p>可以非常精确控制停顿时间，<strong>在不牺牲吞吐量前提下，实现低停顿垃圾回收</strong>。</p>
+</li>
 </ol>
-</blockquote>
-<p>修饰的方法时</p>
-<blockquote>
-<ol>
-<li>含有该抽象方法的类必须定义为抽象类，但抽象类可以没有抽象方法。</li>
-<li>访问权限可以使用<code>public</code>、<code>default</code>、<code>protected</code>，不能为<code>private</code>，因为抽象方法必须被子类实现（覆写），而private权限对于子类来 说是不能访问的，所以就会产生矛盾，</li>
-<li>不能用static修饰，因为没有主体</li>
-</ol>
-</blockquote>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span>  <span class="token keyword">class</span>  <span class="token class-name">MyAbstract</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> String name<span class="token operator">=</span><span class="token string">"小米"</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> price<span class="token operator">=</span> <span class="token number">1800</span><span class="token punctuation">;</span>
-
-    <span class="token function">MyAbstract</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>price<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//权限不能为 private</span>
-<span class="token punctuation">}</span></code></pre>
-<h3 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h3><p>在 Java中 interface 即接口，是抽象类的延伸，在 Java 8 之前，它可以看成是一个完全抽象的类，Java 8 开始，接口也可以拥有<code>default</code>的方法实现，是因为不支持默认方法的接口的维护成本太高</p>
-<blockquote>
-<ol>
-<li>接口的方法访问权限只能为 <code>public</code>，Java 8可以为<code>default</code>，但是必须有方法体</li>
-<li>接口的方法默认<code>public abstract</code> 也可以由 static 修饰</li>
-<li>接口的方法可以定义为 <code>public static</code> ，但是必须有方法体，且只能有接口类名调用</li>
-<li>成员变量默认为<code>public staic final</code></li>
-</ol>
-</blockquote>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span>  <span class="token class-name">MyInterface</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> price <span class="token operator">=</span> <span class="token number">1800</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">void</span> <span class="token function">outName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"MyInterface print： default Method"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"MyInterface price="</span><span class="token operator">+</span>price<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyInterfaceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">MyInterface</span> <span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">outName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I'm a MyInterfaceImpl"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        MyInterface my <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyInterfaceImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        my<span class="token punctuation">.</span><span class="token function">outName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        my<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//        MyInterfaceImpl.print();// 实现类类名调用时， 提示编译错误</span>
-        MyInterface<span class="token punctuation">.</span><span class="token function">price</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="abstract-和-interface-的区别"><a href="#abstract-和-interface-的区别" class="headerlink" title="abstract 和 interface 的区别"></a>abstract 和 interface 的区别</h3><p><strong>从定义分析</strong></p>
-<ul>
-<li>抽象类和接口都不能直接实例化；抽象方法必须由子类来进行重写</li>
-<li>抽象类单继承，接口多实现</li>
-<li>抽象类可有构造方法，普通成员变量，非抽象的普通方法，静态方法</li>
-<li>抽象类的抽象方法访问权限可以为：public、protected 、default</li>
-<li>接口中变量类型默认public staic final，</li>
-<li>接口中普通方法默认public abstract，没有具体实现</li>
-<li>jdk1.8 中接口可有<strong>静态方法和default（有方法体）方法</strong></li>
-</ul>
-<p><strong>从应用场合分析</strong></p>
-<ul>
-<li>接口：需要将一组类视为单一的类，而调用者只通过接口来与这组类发生联系。</li>
-<li>抽象类：1、在既需要统一的接口，又需要实例变量或缺省的方法的情况下就可以使用它；2、定义了一组接口，但又不想强迫每个实现类都必须实现所有的接口</li>
-</ul>
+<p><strong>G1 收集器避免全区域垃圾收集，它把堆内存划分为大小固定的几个独立区域，并且跟踪这些区域的垃圾收集进度，同时在后台维护一个优先级列表，每次根据所允许的收集时间，优先回收垃圾最多的区域。</strong></p>
+<p><strong>区域划分和优先级区域回收机制，确保 G1 收集器可以在有限时间获得最高的垃圾收集效率。整体基于标记整理算法，局部region之间基于复制算法</strong></p>
+<p><strong>特点：并行与并发、分代收集、空间整合、可预测的停顿</strong></p>
+<p>整个过程分为 4 个阶段：初始标记、并发标记、最终标记、筛选回收</p>
+<p><strong>整理上：响应优先选择CMS，吞吐量高选择G1</strong></p>
+<h1 id="JVM启动参数"><a href="#JVM启动参数" class="headerlink" title="JVM启动参数"></a>JVM启动参数</h1><p><strong>-Xmx</strong> ：设置最大堆容量</p>
+<p><strong>-Xms</strong> ：设置初始堆容量</p>
+<p><strong>-Xmn</strong> ：新生代大小</p>
+<p><strong>-Xss</strong> ：参数设定每个线程的栈大小</p>
+<p>-XX:newRatio ：新生代与老年代的比例</p>
+<p>-XX:SurvivorRatio ：Eden区与Survivor的比例</p>
+<p>-XX:PermSize ：永久代的初始大小</p>
+<p>-XX:MaxPermSize ：永久代的最大空间</p>
+<p>-XX:MaxTenuringThreshold：设置垃圾最大年龄</p>
+<p>-XX:MaxDirectMemorySize  ：直接内存，如果不指定与Xmx  一样</p>
+<p>Eclipse Memory Analyzer：Eclipse 插件，Java内存分析器，可帮助您查找内存泄漏并减少内存消耗。</p>
+<p>以上图片引用他人，已忘记从哪拷贝，如图片作者特殊需说明，请留言！！</p>
 
             </div>
             <hr/>
@@ -683,7 +640,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://husycode.cn/2020/01/03/java-ji-chu-pian-3-chang-yong-guan-jian-zi-te-xing/">http://husycode.cn/2020/01/03/java-ji-chu-pian-3-chang-yong-guan-jian-zi-te-xing/</a>
+                    <a href="http://husycode.cn/2020/01/07/jvm-3-gc-hui-shou-ji-zhi/">http://husycode.cn/2020/01/07/jvm-3-gc-hui-shou-ji-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -725,8 +682,8 @@
                                     <span class="chip bg-color">面试考点</span>
                                 </a>
                             
-                                <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
-                                    <span class="chip bg-color">Java 基础</span>
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
                                 </a>
                             
                         </div>
@@ -898,7 +855,7 @@
         repo: 'husycoding.github.io',
         owner: 'husycoding',
         admin: "husycoding",
-        id: '2020-01-03T18-54-40',
+        id: '2020-01-07T21-24-29',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -923,37 +880,32 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/01/04/java-ji-chu-pian-4-shu-ju-lei-xing/">
+                <a href="/2020/01/07/jvm-4-gc-diao-you/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Java-基础篇（4）数据类型">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="JVM（4）GC 调优">
                         
-                        <span class="card-title">Java-基础篇（4）数据类型</span>
+                        <span class="card-title">JVM（4）GC 调优</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在本章中，主要介绍一下 Java 最常用、也是基础考点的数据类型；我们都知道 Java 语言提供了八种基本类型：六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。并且还提供了其对应的引用类型。
-
-基本类型
-
-
-类型
-字节
+                            JVM 的定位系统问题时，知识和经验是关键基础，数据是依据、工具是运用知识处理数据的手段
+数据包括：运行日志、异常堆栈、GC日志、线程快照（thread dump、javacore文件）、堆转储快照（headdump / hprof 文件）
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-07
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
                                 </a>
                             
                             
@@ -967,8 +919,8 @@
                         <span class="chip bg-color">面试考点</span>
                     </a>
                     
-                    <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">Java 基础</span>
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
                 </div>
@@ -982,34 +934,33 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/02/java-ji-chu-pian-2-san-da-te-xing-he-liu-da-yuan-ze/">
+                <a href="/2020/01/07/jvm-2-lei-de-jia-zai/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Java-基础篇（2）三大特性和六大原则">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="JVM（2）类的加载">
                         
-                        <span class="card-title">Java-基础篇（2）三大特性和六大原则</span>
+                        <span class="card-title">JVM（2）类的加载</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            三大特性在 Java 编程中三大特性指的是封装、继承、多态
+                            类加载机制在 jvm 中，Java类的加载过程分为5个部分：加载，验证，准备，解析，初始化，下面我们就分别来看一下这5个过程。
 
-封装：封装把一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，如果属性不想被外界访问，我们大可不必提供方法给外界访问优点：减少耦合，代码重用，减轻维护
-继承：它可以使
+加载这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对象，作为方法区这个类的各种数据的
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
                                 </a>
                             
                             
@@ -1023,8 +974,8 @@
                         <span class="chip bg-color">面试考点</span>
                     </a>
                     
-                    <a href="/tags/Java-%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">Java 基础</span>
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
                 </div>

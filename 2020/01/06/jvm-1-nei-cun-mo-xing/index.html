@@ -471,7 +471,7 @@ JVM 内存区域主要分为：
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    2.6k
                 </div>
                 
 
@@ -586,36 +586,7 @@ JVM 内存区域主要分为：
 <li><strong>废弃常量：</strong> 该常量没有任何对象进行引用，就会被回收。</li>
 <li><strong>无用的类：</strong> 该类的所有实例都已经被回收，该类的ClassLoader已经被回收，该类的Class对象没有被引用，无法完成通过反射访问该类 </li>
 </ul>
-<h2 id="JVM启动参数"><a href="#JVM启动参数" class="headerlink" title="JVM启动参数"></a>JVM启动参数</h2><p><strong>-Xmx</strong> ：设置最大堆容量</p>
-<p><strong>-Xms</strong> ：设置初始堆容量</p>
-<p><strong>-Xmn</strong> ：新生代大小</p>
-<p><strong>-Xss</strong> ：参数设定每个线程的栈大小</p>
-<p>-XX:newRatio ：新生代与老年代的比例</p>
-<p>-XX:SurvivorRatio ：Eden区与Survivor的比例</p>
-<p>-XX:PermSize ：永久代的初始大小</p>
-<p>-XX:MaxPermSize ：永久代的最大空间</p>
-<p>-XX:MaxTenuringThreshold：设置垃圾最大年龄</p>
-<p>-XX:MaxDirectMemorySize  ：直接内存，如果不指定与Xmx  一样</p>
-<p>Eclipse Memory Analyzer：Eclipse 插件，Java内存分析器，可帮助您查找内存泄漏并减少内存消耗。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -876,38 +847,31 @@ JVM 内存区域主要分为：
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/01/06/jvm-1-nei-cun-mo-xing/">
+                <a href="/2020/01/07/jvm-2-lei-de-jia-zai/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="JVM（1）内存模型">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="JVM（2）类的加载">
                         
-                        <span class="card-title">JVM（1）内存模型</span>
+                        <span class="card-title">JVM（2）类的加载</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JVM内存分布
-JVM 内存区域主要分为：
+                            类加载机制在 jvm 中，Java类的加载过程分为5个部分：加载，验证，准备，解析，初始化，下面我们就分别来看一下这5个过程。
 
-线程私有区域【程序计数器、虚拟机栈、本地方法区】
-线程共享区域【JAVA 堆、方法区】
-直接内存。
-
-线程私有数据区域生命周期与线程相同，依赖用户线程的启动/结束 而 创建/销毁
-线程共享区域随
+加载这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对象，作为方法区这个类的各种数据的
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -920,7 +884,6 @@ JVM 内存区域主要分为：
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1157,13 +1120,12 @@ Error：用来表示 JVM 无法处理的错误，是指 java 运行时系统的�
 
 
     <footer class="page-footer bg-color">
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
             <a href="http://husycode.cn" target="_blank">Husy</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+           
             <br>
             
             
@@ -1183,6 +1145,50 @@ Error：用来表示 JVM 无法处理的错误，是指 java 运行时系统的�
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "1";
+                    var startDate = "1";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             
