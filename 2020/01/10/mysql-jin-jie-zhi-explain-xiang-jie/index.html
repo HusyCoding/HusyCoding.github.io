@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JVM（4）GC 调优, Husy">
-    <meta name="description" content="JVM 的定位系统问题时，知识和经验是关键基础，数据是依据、工具是运用知识处理数据的手段
-数据包括：运行日志、异常堆栈、GC日志、线程快照（thread dump、javacore文件）、堆转储快照（headdump / hprof 文件）">
+    <meta name="keywords" content="MySQL-进阶之Explain详解, Husy">
+    <meta name="description" content="在 MySQL 性能优化中，慢查询优化是我们经常需要解决的问题。通常我们可以使用 Explain 命令来了解 SQL 语句的执行计划，仅对select语句有效
+Explain代码演示如下
+
+explain 查询会输出 12 列，如：id、s">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>JVM（4）GC 调优 | Husy</title>
+    <title>MySQL-进阶之Explain详解 | Husy</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JVM（4）GC 调优</h1>
+                    <h1 class="description center-align post-title">MySQL-进阶之Explain详解</h1>
                 </div>
             </div>
         </div>
@@ -426,12 +428,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
-                                <span class="chip bg-color">面试考点</span>
+                            <a href="/tags/%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C/">
+                                <span class="chip bg-color">实战经验</span>
                             </a>
                         
-                            <a href="/tags/JVM/">
-                                <span class="chip bg-color">JVM</span>
+                            <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                                <span class="chip bg-color">性能优化</span>
+                            </a>
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
                             </a>
                         
                     </div>
@@ -442,8 +448,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JVM/" class="post-category">
-                                JVM
+                            <a href="/categories/SQL/" class="post-category">
+                                SQL
                             </a>
                         
                     </div>
@@ -455,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-07
+                    2020-01-10
                 </div>
                 
 
@@ -464,14 +470,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    4 分
                 </div>
                 
 				
@@ -487,208 +493,41 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>JVM 的定位系统问题时，知识和经验是关键基础，数据是依据、工具是运用知识处理数据的手段</p>
-<p>数据包括：运行日志、异常堆栈、GC日志、线程快照（thread dump、javacore文件）、堆转储快照（headdump / hprof 文件）</p>
-<h1 id="调优命令"><a href="#调优命令" class="headerlink" title="调优命令"></a>调优命令</h1><p>JDK监控和故障处理命令，在bin目录下有：<strong>jps、 jstat、jmap、jhat、jstack、jinfo</strong></p>
-<ul>
-<li>jps：显示虚拟机进程，常用如：<code>jps -l -v</code></li>
-<li>jstat：收集虚拟机各方面的运行数据，常用如：<code>jps-gcutil 2764</code>、<code>jstat  -gc 2764 250 20</code></li>
-<li>jinfo：显示虚拟机配置信息</li>
-<li>jmap：生成虚拟机内存转储快照（headdump 文件），常用如：<code>jmap -dump:live,format=b,file=dump.hprof 28920</code></li>
-<li>jhat：用于分析headdump 文件，他会建立一个http/html 的服务器，让客户可以在浏览器上查看分析结果，常用如：<code>jhat  dump.hprof</code></li>
-<li>jstack： 显示虚拟机线程快照，常用如：<code>jstack -l 11494</code></li>
-</ul>
-<p>下面做一 一介绍</p>
-<h1 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h1><p> 显示指定系统内所有的HotSpot虚拟机进程，</p>
-<p>格式 ：</p>
+                <p>在 MySQL 性能优化中，慢查询优化是我们经常需要解决的问题。通常我们可以使用 Explain 命令来了解 SQL 语句的执行计划，仅对select语句有效</p>
+<h1 id="Explain"><a href="#Explain" class="headerlink" title="Explain"></a><strong>Explain</strong></h1><p>代码演示如下</p>
+<p><img src="clipboard.png" alt=""></p>
+<p>explain 查询会输出 12 列，如：id、select_type、table、partitions、type、possible_keys、key、key_len、ref、rows、filtered、extra</p>
+<p>以下分别介绍一下，其中type 和 key 是我们看一个SQL 性能好坏的重点。</p>
+<h2 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h2><p>表示查询类型，主要用于区别普通查询，联合查询，子查询等的复杂查询</p>
 <blockquote>
-<p>   jps -<option>  [hostid]</p>
+<p>  <strong>SIMPLE</strong>：简单SELECT(不使用UNION或子查询)<br>  <strong>PRIMARY</strong>：最外面的SELECT<br>  <strong>UNION</strong>：UNION中的第二个或后面的SELECT语句<br>  <strong>DEPENDENT UNION</strong>：UNION中的第二个或后面的SELECT语句,取决于外面的查询<br>  <strong>UNION RESULT</strong>：UNION 的结果<br>  <strong>SUBQUERY</strong>：子查询中的第一个SELECT<br>  <strong>DEPENDENT SUBQUERY</strong>：子查询中的第一个SELECT,取决于外面的查询<br>  <strong>DERIVED</strong>：导出表的SELECT(FROM子句的子查询)</p>
 </blockquote>
-<p>options 参数：</p>
-<pre class=" language-bash"><code class="language-bash">  -q：只输出LVMID，省略主类的名称
-  -m：输出新建启动时传递给主类main<span class="token punctuation">(</span><span class="token punctuation">)</span>函数的参数
-  -l：输出主类的全名，如果进程执行的是Jar包，输出Jar路径
-  -v：输出虚拟机进程启动时JVM参数
-</code></pre>
-<p> 其中[option]、[hostid]参数也可以不写</p>
-<p>一般使用：</p>
+<p><strong>table</strong>数据库中表名称或别名</p>
+<h2 id="type"><a href="#type" class="headerlink" title="type"></a>type</h2><p>表示对表访问方式；常用的类型有： <strong>ALL、index、range、 ref、eq_ref、const、system、NULL（从左到右，性能从差到好）</strong></p>
+<p><strong>注意：一般保证查询至少达到range级别，最好能达到ref</strong></p>
 <blockquote>
-<p>  jps -l -m</p>
+<p>  <strong>ALL</strong>：Full Table Scan， MySQL将遍历全表以找到匹配的行<br>  <strong>index</strong>：Full Index Scan，index与ALL区别为index类型只遍历索引树<br>  <strong>range</strong>：只检索给定范围的行，如： between/in、&gt; 、&lt; 、in 等方式<br>  <strong>ref</strong>：表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值<br>  <strong>eq_ref</strong>： 类似ref，区别就在使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配，简单来说，就是多表连接中使用primary key或者 unique key作为关联条件<br>  <strong>const/system</strong>： 当MySQL对查询最多有一个匹配行，在这行的列值可被优化器剩余部分认为是常数。如将主键置于where列表中，MySQL就能将该查询转换为一个常量，system是const类型的特例，当查询的表只有一行的情况下，使用system<br>  <strong>NULL</strong>：MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引列里选取最小值可以通过单独索引查找完成。</p>
 </blockquote>
-<h1 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h1><p>用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</p>
-<p>格式 </p>
-<blockquote>
-<p>   jstat -<option> [-t] [-h<lines>] <vmid> [<interval> [<count>]]</p>
+<h2 id="possible-keys"><a href="#possible-keys" class="headerlink" title="possible_keys"></a>possible_keys</h2><p>指出MySQL能使用哪个索引在表中找到记录，查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询使用（该查询可以利用的索引，如果没有任何索引显示 null）</p>
+<h2 id="key"><a href="#key" class="headerlink" title="key"></a>key</h2><p><strong>显示MySQL实际决定使用的键(索引)。如果没有选择索引，键是NULL。</strong></p>
+<p><strong>key_len：</strong>表示索引中使用的字节数</p>
+<p><strong>ref：</strong>列与索引的比较，表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值</p>
+<p><strong>rows：</strong>估算出结果集行数，表示MySQL根据表统计信息及索引选用情况，估算的找到所需的记录所需要读取的行数</p>
+<h2 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h2><blockquote>
+<p>  Using index：表示相应的select操作用使用覆盖索引，避免访问了表的数据行。如果同时出现using where，表名索引被用来执行索引键值的查找；如果没有同时出现using where，表名索引用来读取数据而非执行查询动作。</p>
+<p>  Using where：表明使用where过滤，当有where子句时，extra都会有说明。</p>
+<p>  Using temporary：表示需要使用临时表来存储结果集，常见于排序和分组查询，常见 group by ; order by</p>
+<p>  Using filesort：当Query中包含 order by 操作，而且无法利用索引完成的排序操作称为“文件排序”</p>
+<p>  Distinct：发现第1个匹配行后,停止为当前的行组合搜索更多的行</p>
+<p>  Not exists：表示MySQL能够对查询进行LEFT JOIN优化,发现1个匹配LEFT JOIN标准的行后,不再为前面的的行组合在该表内检查更多的行。</p>
+<p>  Range checked for each record：mysql没有发现好的索引可用，速度比没有索引要快得多。</p>
+<p>  Using sort_union(…)/Using union(…)/Using intersect(…)：表明 index_merge 联接类型合并索引扫描。</p>
+<p>  Using index for group-by：表明可以在索引中找到GROUP BY或DISTINCT所需的所有数据，不需要查询实际的表。</p>
 </blockquote>
+<p><strong>资料参考</strong></p>
 <ul>
-<li>vmid： 进程号，interval 和count ：表示查询间隔和次数</li>
-<li>options 参数如下</li>
+<li>高性能MySQL（第3版）.pdf</li>
 </ul>
-<pre class=" language-bash"><code class="language-bash">-class：监视类装载、卸载熟练、总空间以及类装载所消耗的时间
--gc ： 监视堆状况，包括Eden区、两个survivor区、老年代、永久代等容量、已用空间和GC 时间合计等信息
--gccapacity：监视内容和 -gc基本相同，但输出主要关注堆各个区域使用到最大，最小空间
--gcutil：监视内容和 -gc基本相同，但输出主要关注已使用空间占总空间的百分比
--gccause：与 -gcutil一样，额外输出导致上次GC产生的原因
--gcnew：监视新生代GC状况
--gcnewcapacity：监视内容和 -gcnew 基本相同，输出输出主要关注使用到的最大、最小空间
--gcold：监视老年代GC状况
--gcoldcapacity：监视内容和 -gcold 基本相同，输出输出主要关注使用到的最大、最小空间
--gcpermcapacity：输出永久代使用的最大、最小空间
--compiler：输出JIT 编译期编译过的方法、耗时等信息
--printcompilation：输出已经被JIT编译的方法</code></pre>
-<p>一般使用：</p>
-<blockquote>
-<p>  jps-gcutil 2764    //输出的是已使用空间占总空间的百分比</p>
-<p>  jstat  -gc 2764 250 20     //每隔250ms输出2764的gc情况，一共输出20次</p>
-</blockquote>
-<h1 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h1><p>作用是实时查看和调整虚拟机运行参数。 之前的jps -v口令只能查看到显示指定的参数，如果想要查看未被显示指定的参数的值就要使用jinfo口令</p>
-<p>格式 </p>
-<blockquote>
-<p>   jinfo  [option vmid]</p>
-</blockquote>
-<p>vmid： 进程号</p>
-<p>option参数</p>
-<pre class=" language-bash"><code class="language-bash">-flag <span class="token keyword">:</span> 输出指定args参数的值
--flags <span class="token keyword">:</span> 不需要args参数，输出所有JVM参数的值
--sysprops <span class="token keyword">:</span> 输出系统属性，等同于System.getProperties<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>一般使用：<code>jinfo  -flag 11494</code></p>
-<h1 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h1><p><strong>用于生成heap dump文件</strong>，如果不使用这个命令，还阔以使用-XX:+HeapDumpOnOutOfMemoryError参数来让虚拟机出现OOM的时候·自动生成dump文件。</p>
-<p> jmap不仅能生成dump文件，还阔以查询finalize执行队列、Java堆和永久代的详细信息，如当前使用率、当前使用的是哪种收集器等。</p>
-<p>格式 </p>
-<blockquote>
-<p>   jmap  -<option>  [vmid] </p>
-</blockquote>
-<p>option 参数</p>
-<pre class=" language-bash"><code class="language-bash">-dump <span class="token keyword">:</span> 生成堆转储快照
--finalizerinfo <span class="token keyword">:</span> 显示在F-Queue队列等待Finalizer线程执行finalizer方法的对象
--heap <span class="token keyword">:</span> 显示Java堆详细信息
--histo <span class="token keyword">:</span> 显示堆中对象的统计信息
--permstat <span class="token keyword">:</span> to print permanent generation statistics
--F <span class="token keyword">:</span> 当-dump没有响应时，强制生成dump快照</code></pre>
-<p>一般使用 :</p>
-<blockquote>
-<p>   jmap -dump:live,format=b,file=dump.hprof 28920</p>
-</blockquote>
-<p>dump堆到文件，format指定输出格式，live指明是活着的对象，file指定文件名</p>
-<p>dump.hprof这个后缀是为了后续可以直接用MAT(Memory Anlysis Tool)打开。</p>
-<h1 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h1><p>用来分析jmap生成的dump；与jmap搭配使用；jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看。</p>
-<p>在此要注意，一般不会直接在服务器上进行分析，因为jhat是一个耗时并且耗费硬件资源的过程，一般把服务器生成的dump文件复制到本地或其他机器上进行分析。</p>
-<p>格式 </p>
-<blockquote>
-<p>  jhat [dumpfile] </p>
-</blockquote>
-<h1 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h1><p>用于生成java虚拟机当前时刻的线程快照。线程快照是当前java虚拟机内每一条线程正在执行的方法堆栈的集合，<strong>生成线程快照的主要目的是定位线程出现长时间停顿的原因</strong>，如线程间死锁、死循环、请求外部资源导致的长时间等待等。 如果java程序崩溃生成core文件，jstack工具可以用来获得core文件的java stack和native stack的信息，从而可以轻松地知道java程序是如何崩溃和在程序何处发生问题。另外，jstack工具还可以附属到正在运行的java程序中，看到当时运行的java程序的java stack和native stack的信息, 如果现在运行的java程序呈现hung的状态，jstack是非常有用的。</p>
-<p>格式 </p>
-<blockquote>
-<p>  jstack [option] LVMID</p>
-</blockquote>
-<p>option参数</p>
-<pre class=" language-bash"><code class="language-bash">-F <span class="token keyword">:</span> 当正常输出请求不被响应时，强制输出线程堆栈
--l <span class="token keyword">:</span> 除堆栈外，显示关于锁的附加信息
--m <span class="token keyword">:</span> 如果调用到本地方法的话，可以显示C/C++的堆栈</code></pre>
-<p>一般使用：</p>
-<blockquote>
-<p>  jstack -l 11494</p>
-</blockquote>
-<p>分析：这里有一篇文章解释的很好 <a href="http://www.hollischuang.com/archives/110" target="_blank" rel="noopener">分析打印出的文件内容</a></p>
-<h1 id="调优工具"><a href="#调优工具" class="headerlink" title="调优工具"></a>调优工具</h1><h2 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h2><ul>
-<li>jdk /bin 目录下，单机jconsole.exe 启动启动</li>
-<li>自动搜索本机运行的所有虚拟机进程，不需要用户自己在使用jps 来查询</li>
-</ul>
-<p>GChisto是一款专业分析gc日志的工具，可以通过gc日志来分析：Minor GC、full gc的时间、频率等等，通过列表、报表、图表等不同的形式来反应gc的情况。</p>
-<p>GC Easy：推荐此工具进行gc分析；这是一个web工具,在线使用非常方便，进入官网，讲打包好的zip或者gz为后缀的压缩包上传，过一会就会拿到分析结果。</p>
-<p><a href="http://gceasy.io" target="_blank" rel="noopener">GC Easy官网地址</a></p>
-<h2 id="VisualVM"><a href="#VisualVM" class="headerlink" title="VisualVM"></a>VisualVM</h2><p>jdk 集成的分析工具，在jdk /bin 目录下，单机jvisualvm.exe 启动</p>
-<h2 id="Oracle-Java-Mission-Control"><a href="#Oracle-Java-Mission-Control" class="headerlink" title="Oracle Java Mission Control"></a>Oracle Java Mission Control</h2><p>jdk 集成的分析工具，在jdk /bin 目录下，单机jmc.exe 启动</p>
-<h1 id="常见问题分析"><a href="#常见问题分析" class="headerlink" title="常见问题分析"></a>常见问题分析</h1><h2 id="查找CPU飙升的原因"><a href="#查找CPU飙升的原因" class="headerlink" title="查找CPU飙升的原因"></a>查找CPU飙升的原因</h2><p>问题分析步骤：</p>
-<ul>
-<li>首先，需要知道哪个进程占用CPU比较高，</li>
-<li>其次，需要知道占用CPU高的那个进程中的哪些线程占用CPU比较高，</li>
-<li>然后，需要知道这些线程的stack trace。</li>
-</ul>
-<p>问题解决步骤：</p>
-<ul>
-<li><p>1、<strong>top</strong>和pgrep来查看系统中Java进程的CPU占用情况。</p>
-<ul>
-<li>命令如下：<strong>top -p <code>pgrep -d , java</code></strong></li>
-<li>pgrep：进程号，<code>top -p</code>：进程的信息。记录下CPU占用率最高的那个进程号。</li>
-</ul>
-</li>
-<li><p>2、top来查看进程中CPU占用最高的那些线程</p>
-<ul>
-<li><strong>top -Hp 12345</strong></li>
-<li>假定12345为占用CPU高的进程号。-H是显示该进程中线程的CPU占用情况。同样，记录下CPU占用率高的那些线程号。</li>
-</ul>
-</li>
-<li><p>3、ctrl+H 切换到线程模式，找到占用cpu最高的线程。并把<strong>线程号转化为十六进制</strong>，<strong>printf “%x\n” &lt;线程ID&gt;</strong></p>
-</li>
-<li><p>4、通过<strong>jstack</strong>导出Java应用中线程的stack trace（堆栈轨迹）</p>
-<ul>
-<li><strong>jstack 12345</strong></li>
-</ul>
-</li>
-</ul>
-<p>注意：因为top中显示的线程号是10进制，jstack的输出结果中的线程号是16进制，所以只需要把top中看到线程号转换成16进制</p>
-<p>小结一下，我们通过top和jstack来找到CPU占用高的线程的stack trace，可以使用Eclipse Memory Analyzer插件分析</p>
-<h2 id="Java堆溢出和泄漏"><a href="#Java堆溢出和泄漏" class="headerlink" title="Java堆溢出和泄漏"></a>Java堆溢出和泄漏</h2><h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>程序在申请内存时,没有足够的内存空间供其使用</p>
-<ul>
-<li><strong>危害：</strong>容易受攻击</li>
-<li><strong>影响因素</strong>如下几大类： <ul>
-<li>内存中加载的数据量过于庞大，如一次从数据库取出过多数据</li>
-<li>集合类中有对对象的引用，使用完后未清空，使得JVM不能回收</li>
-<li>代码中存在死循环或循环产生过多重复的对象实体</li>
-</ul>
-</li>
-<li><strong>解决方案：</strong><ul>
-<li>修改JVM启动参数，直接增加内存</li>
-<li>检查错误日志，是否有其他异常或错误；</li>
-<li>对代码进行走查和分析，找出可能发生内存溢出的位置</li>
-<li>重点排查：数据库的取值，死循环和递归调用</li>
-</ul>
-</li>
-</ul>
-<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>无法释放已申请的内存空间</p>
-<ul>
-<li><p><strong>危害：频繁GC、运行崩溃</strong></p>
-</li>
-<li><p>影响因素如下几大类： </p>
-<ul>
-<li><p>静态集合类引起内存泄露</p>
-</li>
-<li><p>当集合里面的对象属性被修改后，再调用remove()方法时不起作用。</p>
-<pre class=" language-java"><code class="language-java">Set<span class="token operator">&lt;</span>Person<span class="token operator">></span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span>Person<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-Person p3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token string">"唐僧"</span><span class="token punctuation">,</span><span class="token string">"pwd1"</span><span class="token punctuation">,</span><span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-p3<span class="token punctuation">.</span><span class="token function">setAge</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//修改p3的年龄,此时p3元素对应的hashcode值发生改变</span>
-set<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//此时remove不掉，造成内存泄漏</span></code></pre>
-</li>
-<li><p>监听器。释放对象时没有删除监听器。</p>
-</li>
-<li><p>各种连接 ，比如数据库连接</p>
-</li>
-<li><p>单例对象持有外部对象的引用</p>
-</li>
-</ul>
-</li>
-<li><p><strong>解决办法：</strong>使用工具jconsole分析</p>
-</li>
-</ul>
-<p>堆的最小值-Xms参数，最大值-Xmx参数</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//代码实现堆溢出：---> 无限循环创建 对象</span>
-List list <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token operator">*</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//----------->就是这一步</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"分配次数："</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token operator">++</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span></code></pre>
-<h3 id="Java栈溢出"><a href="#Java栈溢出" class="headerlink" title="Java栈溢出"></a>Java栈溢出</h3><p><strong>栈溢出SOF定义</strong>：线程请求的栈深度超过虚拟机允许的最大深度</p>
-<ul>
-<li>无论是由于栈帧太大还是栈容量太小，当内存无法分配时都是OOM异常。</li>
-<li>虚拟机栈溢出：<strong>深度溢出：递归方法；广度溢出：大数组，建立多线程</strong></li>
-</ul>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//代码实现栈泄漏---> 方法无限递归调用</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">add</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
 
             </div>
             <hr/>
@@ -714,7 +553,7 @@ List list <span class="token operator">=</span><span class="token keyword">new</
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://husycode.cn/2020/01/07/jvm-4-gc-diao-you/">http://husycode.cn/2020/01/07/jvm-4-gc-diao-you/</a>
+                    <a href="http://husycode.cn/2020/01/10/mysql-jin-jie-zhi-explain-xiang-jie/">http://husycode.cn/2020/01/10/mysql-jin-jie-zhi-explain-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -752,12 +591,16 @@ List list <span class="token operator">=</span><span class="token keyword">new</
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
-                                    <span class="chip bg-color">面试考点</span>
+                                <a href="/tags/%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C/">
+                                    <span class="chip bg-color">实战经验</span>
                                 </a>
                             
-                                <a href="/tags/JVM/">
-                                    <span class="chip bg-color">JVM</span>
+                                <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                                    <span class="chip bg-color">性能优化</span>
+                                </a>
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
                                 </a>
                             
                         </div>
@@ -929,7 +772,7 @@ List list <span class="token operator">=</span><span class="token keyword">new</
         repo: 'husycoding.github.io',
         owner: 'husycoding',
         admin: "husycoding",
-        id: '2020-01-07T21-59-36',
+        id: '2020-01-10T20-55-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -954,35 +797,36 @@ List list <span class="token operator">=</span><span class="token keyword">new</
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/01/08/gui-fan-zhi-java-ming-ming-gui-yue/">
+                <a href="/2020/01/10/xing-neng-you-hua-1-mysql-cha-xun-jiao-ben-you-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Java-规范之命名规约">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="性能优化（1）MySQL查询脚本优化">
                         
-                        <span class="card-title">Java-规范之命名规约</span>
+                        <span class="card-title">性能优化（1）MySQL查询脚本优化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            每个公司都有不同的标准，目的是为了保持统一，减少沟通成本，提升团队研发效能。
-但，在实际开发中，我们阅读代码时，常说别人写的代码惨目忍睹，总认为自己的最好的，所以本文为自我总结，仅供参考
-规约律令通用
-
-强制：类使用大驼峰命名，方法和局部变
+                            SQL 的执行顺序要想优化MySQL的查询语句，必须先了解查询 SQL 的执行顺序
+一个完整的Query SQL，如下：
+select distinct 
+    &lt;select_list>
+from
+    &lt;left_tab
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-08
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-10
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/SQL/" class="post-category">
+                                    SQL
                                 </a>
                             
                             
@@ -996,6 +840,14 @@ List list <span class="token operator">=</span><span class="token keyword">new</
                         <span class="chip bg-color">实战经验</span>
                     </a>
                     
+                    <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                        <span class="chip bg-color">性能优化</span>
+                    </a>
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1007,34 +859,36 @@ List list <span class="token operator">=</span><span class="token keyword">new</
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/07/jvm-3-gc-hui-shou-ji-zhi/">
+                <a href="/2020/01/09/xing-neng-you-hua-2-mysql-mo-hu-cha-xun/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="JVM（3）GC 回收机制">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="性能优化（2）MySQL模糊查询">
                         
-                        <span class="card-title">JVM（3）GC 回收机制</span>
+                        <span class="card-title">性能优化（2）MySQL模糊查询</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在 JVM 中 GC 的回收机制也是非常重要的一块，废话不多说，先上张图
+                            关于MySQL模糊查询有优化问题，网络上如下几种方案：
 
-如何确定垃圾1. 引用计数法
-每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题
+模糊查询修改为后缀模糊查询
+使用LOCATE（substr,str,pos）方法
+使用POSITION(substr IN field)方法
+使用INSTR(str,substr)方
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
+                            <a href="/categories/SQL/" class="post-category">
+                                    SQL
                                 </a>
                             
                             
@@ -1044,12 +898,16 @@ List list <span class="token operator">=</span><span class="token keyword">new</
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95%E8%80%83%E7%82%B9/">
-                        <span class="chip bg-color">面试考点</span>
+                    <a href="/tags/%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C/">
+                        <span class="chip bg-color">实战经验</span>
                     </a>
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                        <span class="chip bg-color">性能优化</span>
+                    </a>
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
                     </a>
                     
                 </div>
